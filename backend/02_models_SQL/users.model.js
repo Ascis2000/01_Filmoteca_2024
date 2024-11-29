@@ -26,6 +26,7 @@ exports.getUserById = async (id) => {
 
 exports.findUserByUsername = async (nombre) => {
     try {
+        console.log("nombre", nombre)
         // Ejecutamos la consulta usando el nombre
         const { rows } = await db.query(queries.findUserByUsername, [nombre]);
 
