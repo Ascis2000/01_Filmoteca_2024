@@ -1,0 +1,51 @@
+
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: rgb(240, 240, 240);
+    padding: 1rem;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+h1 {
+    font-size: 1.8rem;
+    margin: 0;
+}
+.navigation {
+    background-color: #f8f9fa;
+    border-bottom: 1px solid #ddd;
+    padding: 10px 20px;
+    width: 100%;
+}
+
+.navigation ul {
+    display: flex;
+    justify-content: center;
+    list-style: none;
+}
+
+.navigation li {
+    margin-right: 20px; /* Espacio entre los elementos de la lista */
+}
+
+.navigation .auth-icon {
+    cursor: pointer;
+    font-size: 24px; /* Tamaño del ícono */
+    color: #333; /* Color del ícono */
+}
+
+.navigation .auth-icon:hover {
+    color: #007BFF; /* Cambia el color del ícono al pasar el mouse */
+}
+
+.navigation a {
+    text-decoration: none;
+    color: #007bff;
+    font-weight: bold;
+    transition: color 0.3s ease;
+}
+
+.navigation a:hover {
+    color: #0056b3;
+}

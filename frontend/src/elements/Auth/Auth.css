@@ -1,0 +1,103 @@
+
+/* Contenedor de autenticación */
+.boxAuth {
+    padding: 20px;
+    background-color: #fff;
+    text-align: center;
+    position: fixed; /* Hace que el contenedor esté fijo en la pantalla */
+    top: 6px; /* Centra el contenedor verticalmente */
+    right: 6px; /* Posiciona el contenedor a la derecha */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Sombra suave alrededor */
+    border-radius: 10px; /* Bordes redondeados */
+    z-index: 1000; /* Asegura que la capa esté sobre otros elementos */
+    width: 300px; /* Ancho del contenedor */
+    background-color: #f8f9fa; /* Color de fondo más suave */
+}
+
+/* Estilo para el icono de cerrar */
+.boxAuth .close-icon {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    font-size: 20px;
+    color: #333;
+    cursor: pointer;
+    transition: color 0.3s ease;
+}
+
+.boxAuth .close-icon:hover {
+    color: #dc3545; /* Rojo cuando el usuario pase el ratón sobre el ícono */
+}
+
+/* Formulario */
+.boxAuth .auth-form {
+    margin-bottom: 20px;
+}
+
+.boxAuth .form-group {
+    margin-bottom: 15px;
+}
+
+.boxAuth label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+    font-size: 14px; /* Tamaño de fuente más pequeño */
+    color: #333; /* Color de texto más oscuro */
+}
+
+.boxAuth input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 14px;
+    box-sizing: border-box; /* Asegura que el padding no afecte el tamaño del input */
+}
+
+/* Botones */
+.boxAuth button {
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    width: 100%; /* Los botones ocuparán todo el ancho disponible */
+}
+
+/* Botón Primario */
+.boxAuth .btn-primary {
+    background-color: #007bff;
+    color: #fff;
+}
+
+.boxAuth .btn-primary:hover {
+    background-color: #0056b3;
+}
+
+/* Botón Secundario */
+.boxAuth .btn-secondary {
+    background-color: #6c757d;
+    color: #fff;
+}
+
+.boxAuth .btn-secondary:hover {
+    background-color: #565e64;
+}
+
+/* Botón de Logout */
+.boxAuth .btn-logout {
+    background-color: #dc3545;
+    color: #fff;
+}
+
+.boxAuth .btn-logout:hover {
+    background-color: #a71d2a;
+}
+
+/* Opcional: Agregar una sombra sutil para dar profundidad */
+.boxAuth button:focus {
+    outline: none;
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5); /* Sombra azul cuando el botón está enfocado */
+}
