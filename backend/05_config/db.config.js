@@ -4,11 +4,14 @@ const { Pool } = require('pg');
 
 // configuramos la conexión
 const pool = new Pool({
-    user: 'usuario',
-    host: 'localhost',
-    database: 'nombre_de_base_de_datos',
-    password: 'contraseña',
-    port: 5432,
+    user: process.env.DB_USER,
+    host: process.env.DB_HOST,
+    database: process.env.DB_DATABASE,
+    password: process.env.DB_PASSWORD,
+    port: process.env.DB_PORT,
+    ssl: {
+        rejectUnauthorized: false // Permite conexiones a certificados no verificados
+    },
 });
 
 module.exports = pool;

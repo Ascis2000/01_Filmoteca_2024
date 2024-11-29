@@ -9,10 +9,17 @@ exports.getUserById = `
     SELECT * FROM users WHERE id = $1;
 `;
 
+exports.findUserByUsername = `
+    SELECT id_user, nombre, email, password, role 
+    FROM users 
+    WHERE nombre = $1
+`
+
 // creamos un nuevo usuario
 exports.createUser = `
-    INSERT INTO users (name, email, password) 
-    VALUES ($1, $2, $3) RETURNING *;
+    INSERT INTO users (nombre, email, password, role)
+    VALUES ($1, $2, $3, $4) 
+    RETURNING id_user, nombre, email, role;
 `;
 
 // actualizar un usuario
