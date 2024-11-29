@@ -81,26 +81,20 @@ id_user: ID del usuario que ingresó o es dueño de la película, clave foránea
 -- inserts ejemplo
 INSERT INTO movies (titulo, titulo_original, anio, director, sinopsis, musica, portada, video, image_url, rating, id_user) 
 VALUES 
-('2001: Odisea del espacio', '2001: A Space Odyssey', 1968, 'Stanley Kubrick', 'Sinopsis de la película...', 'Música de la película', 'url_de_portada', 'url_video', 'url_imagen', 9, 11)
+('Aliens, El Regreso', 'Aliens: The Return', 1986, 'James Cameron', 'Sinopsis de Aliens, El Regreso...', 'Música de la película Aliens, El Regreso', 'url_de_portada_aliens', 'url_video_aliens', 'url_imagen_aliens', 8.5, 10);
 
 INSERT INTO movies (titulo, titulo_original, anio, director, sinopsis, musica, portada, video, image_url, rating, id_user) 
 VALUES 
-('Aliens, El Regreso', 'Aliens: The Return', 1986, 'James Cameron', 'Sinopsis de Aliens, El Regreso...', 'Música de la película Aliens, El Regreso', 'url_de_portada_aliens', 'url_video_aliens', 'url_imagen_aliens', 8, 10);
-
-INSERT INTO movies (titulo, titulo_original, anio, director, sinopsis, musica, portada, video, image_url, rating, id_user) 
-VALUES 
-('Aliens 3', 'Alien 3', 1992, 'David Fincher', 'Sinopsis de Aliens 3...', 'Música de la película Aliens 3', 'url_de_portada_aliens3', 'url_video_aliens3', 'url_imagen_aliens3', 7, 10);
+('Aliens 3', 'Alien 3', 1992, 'David Fincher', 'Sinopsis de Aliens 3...', 'Música de la película Aliens 3', 'url_de_portada_aliens3', 'url_video_aliens3', 'url_imagen_aliens3', 7.5, 10);
 
 INSERT INTO movies (titulo, titulo_original, anio, director, sinopsis, musica, portada, video, image_url, rating, id_user) 
 VALUES 
 ('Terminator', 'The Terminator', 1984, 'James Cameron', 'Sinopsis de Terminator...', 'Música de la película Terminator', 'url_de_portada_terminator', 'url_video_terminator', 'url_imagen_terminator', 9, 10);
 
-INSERT INTO movies (titulo, titulo_original, anio, director, sinopsis, musica, portada, video, image_url, rating, id_user) 
-VALUES 
-('Terminator 2', 'Terminator 2: Judgment Day', 1991, 'James Cameron', 'Sinopsis de Terminator 2...', 'Música de la película Terminator 2', 'url_de_portada_terminator2', 'url_video_terminator2', 'url_imagen_terminator2', 9, 10);
 
 UPDATE movies
-SET titulo = 'Película actualizada',
+SET
+    titulo = 'Película actualizada',
     titulo_original = 'Original Movie Title',
     anio = 2023,
     director = 'Director actualizado',
@@ -111,7 +105,8 @@ SET titulo = 'Película actualizada',
     image_url = 'https://example.com/nueva-imagen.jpg',
     rating = 4
 WHERE
-    id_movie = 11 AND id_user = 10
+    id_movie = 123 AND id_user = 1
+RETURNING *;
 
 ---------------
 -- Tabla cast
