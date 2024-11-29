@@ -48,6 +48,7 @@ async function register(req, res) {
 
 
 async function login(req, res) {
+
     const { nombre, password } = req.body;  // Usamos 'username' en lugar de 'email'
     
     try {
@@ -61,13 +62,14 @@ async function login(req, res) {
                 process.env.JWT_SECRET,  // La clave secreta para firmar el JWT
                 { expiresIn: '1h' }  // El token expira en 1 hora
             );
-
+            console.log("token", token)
             // Enviar el token como una cookie segura (opcionalmente, asegurar que sea httpOnly)
             res.cookie('token', token, { httpOnly: true, secure: process.env.NODE_ENV === 'production' });
 
             // Respondemos con los datos del usuario
             res.json({
                 message: 'Login exitoso',
+                token,
                 user: {
                     id_user: user.id_user,
                     nombre: user.nombre,

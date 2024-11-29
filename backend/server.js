@@ -1,6 +1,4 @@
 
-
-
 const express = require('express');
 const app = express();
 
@@ -10,15 +8,8 @@ const dotenv = require('dotenv');
 dotenv.config();
 
 const cors = require('cors');
-
-// Configuración de CORS
-const corsOptions = {
-	origin: 'http://localhost:5173', // Dirección del frontend durante el desarrollo
-	methods: 'GET,POST,PUT,DELETE', // Métodos HTTP permitidos
-	allowedHeaders: 'Content-Type,Authorization', // Encabezados permitidos
-  };
-  
-  app.use(cors(corsOptions)); // Aplica el middleware de CORS
+const corsOptions = require('./05_config/corsConfig'); 
+app.use(cors(corsOptions));
 
 // Middleware para manejar formularios y datos JSON
 app.use(express.urlencoded({ extended: true }));

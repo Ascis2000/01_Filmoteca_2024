@@ -1,0 +1,112 @@
+
+
+<script>
+
+app.post('/saveMovie', async (req, res) => {
+    const { movieTitle, movieYear, director, sinopsis, musica, portada, video, image_url, rating, actors } = req.body;
+    const userId = req.user.id;  // Asumiendo que el ID del usuario está disponible en req.user.id (cuando el usuario está autenticado)
+
+    if (!movieTitle || !movieYear || !director || !actors || actors.length === 0) {
+        return res.status(400).json({ message: 'Faltan datos obligatorios.' });
+    }
+
+    const client = await pool.connect();
+
+    try {
+        await client.query('BEGIN'); // Iniciar transacción
+
+        // 1. Verificar si la película ya existe o insertarla
+        const movieQuery = `
+            INSERT INTO movies (titulo, anio, director, sinopsis, musica, portada, video, image_url, rating, id_user)
+            VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10)
+            ON CONFLICT (titulo, anio, id_user) DO NOTHING
+            RETURNING id_movie
+        `;
+        const movieResult = await client.query(movieQuery, [movieTitle, movieYear, director, sinopsis, musica, portada, video, image_url, rating, userId]);
+        let idMovie = movieResult.rows[0]?.id_movie;
+
+        // Si no se insertó, obtenemos el id_movie de la película existente
+        if (!idMovie) {
+            const existingMovieQuery = `
+                SELECT id_movie FROM movies
+                WHERE titulo = $1 AND anio = $2 AND id_user = $3
+            `;
+            const existingMovieResult = await client.query(existingMovieQuery, [movieTitle, movieYear, userId]);
+            idMovie = existingMovieResult.rows[0]?.id_movie;
+        }
+
+        // 2. Insertar actores en la tabla casting
+        const castingQuery = `
+            INSERT INTO casting (id_movie, cast_name, id_user)
+            VALUES ($1, $2, $3)
+        `;
+        for (const actor of actors) {
+            await client.query(castingQuery, [idMovie, actor, userId]);
+        }
+
+        await client.query('COMMIT'); // Confirmar transacción
+        res.status(201).json({ message: 'Película y actores guardados correctamente.' });
+    } catch (error) {
+        await client.query('ROLLBACK'); // Revertir en caso de error
+        console.error('Error al guardar la película:', error);
+        res.status(500).json({ message: 'Error al guardar la película.' });
+    } finally {
+        client.release(); // Liberar el cliente
+    }
+});
+
+</script>
+
+<form action="/saveMovie" method="POST" id="movieForm">
+    <h2>Crear película</h2>
+    
+    <!-- Datos de la película -->
+    <label for="titulo">Título:</label>
+    <input type="text" id="titulo" name="titulo" required><br>
+
+    <label for="titulo_original">Título original:</label>
+    <input type="text" id="titulo_original" name="titulo_original"><br>
+
+    <label for="anio">Año:</label>
+    <input type="number" id="anio" name="anio" required><br>
+
+    <label for="director">Director:</label>
+    <input type="text" id="director" name="director" required><br>
+
+    <label for="sinopsis">Sinopsis:</label>
+    <textarea id="sinopsis" name="sinopsis"></textarea><br>
+
+    <label for="musica">Música:</label>
+    <input type="text" id="musica" name="musica"><br>
+
+    <label for="portada">Portada (URL):</label>
+    <input type="text" id="portada" name="portada"><br>
+
+    <label for="video">Video (URL):</label>
+    <input type="text" id="video" name="video"><br>
+
+    <label for="image_url">Imagen (URL):</label>
+    <input type="text" id="image_url" name="image_url"><br>
+
+    <label for="rating">Rating:</label>
+    <input type="number" id="rating" name="rating" min="1" max="10"><br>
+
+    <!-- Campo oculto para el usuario logueado -->
+    <input type="hidden" id="id_user" name="id_user" value="11"> <!-- Aquí el ID del usuario logueado -->
+
+    <h3>Agregar actores:</h3>
+    
+    <!-- Actor 1 -->
+    <label for="actor_1">Actor 1:</label>
+    <input type="text" id="actor_1" name="actor_1"><br>
+
+    <!-- Actor 2 -->
+    <label for="actor_2">Actor 2:</label>
+    <input type="text" id="actor_2" name="actor_2"><br>
+
+    <!-- Actor 3 -->
+    <label for="actor_3">Actor 3:</label>
+    <input type="text" id="actor_3" name="actor_3"><br>
+
+    <button type="submit">Guardar Película</button>
+</form>
