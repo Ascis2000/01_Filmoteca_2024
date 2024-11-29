@@ -1,12 +1,24 @@
 
+
+
 const express = require('express');
 const app = express();
 
 const path = require('path');
-const dotenv = require('dotenv');
 
-// configuramos dotenv para las variables de entorno
+const dotenv = require('dotenv');
 dotenv.config();
+
+const cors = require('cors');
+
+// Configuración de CORS
+const corsOptions = {
+	origin: 'http://localhost:5173', // Dirección del frontend durante el desarrollo
+	methods: 'GET,POST,PUT,DELETE', // Métodos HTTP permitidos
+	allowedHeaders: 'Content-Type,Authorization', // Encabezados permitidos
+  };
+  
+  app.use(cors(corsOptions)); // Aplica el middleware de CORS
 
 // Middleware para manejar formularios y datos JSON
 app.use(express.urlencoded({ extended: true }));
@@ -25,7 +37,7 @@ app.use('/auth', authRoutes); // authRoutes
 
 // Ejemplo de ruta
 app.get('/', (req, res) => {
-	res.send('¡Hola, Filmoteca 2024!');
+    res.json({ message: "iniciada APP Filmoteca 2024" });
 });
 
 const manage404 = require('./middlewares/manage404');
