@@ -7,39 +7,25 @@ const getAllMovies = async (id_user) => {
 
     try {
         const result = await pool.query(moviesQueries.getAllMovies, values);
-        return result.rows;  // Retornamos todas las películas del usuario
+        return result.rows; 
     } catch (error) {
         console.error("Error en getAllMovies:", error);
-        throw error;  // Lanza el error para ser manejado en el controlador
+        throw error; 
     }
 };
 
 const searchMovies = async (id_user, { titulo, director, musica }) => {
-    // Preparar valores para la consulta, asignando null si no hay valor
+    
     const values = [
-        String(id_user), // Siempre necesario
-        titulo ? `%${titulo}%` : null, // Comodín para búsquedas parciales, o null si vacío
+        String(id_user), 
+        titulo ? `%${titulo}%` : null, 
         director ? `%${director}%` : null,
         musica ? `%${musica}%` : null,
     ];
 
-    // Construir la consulta
-    const query = `
-        SELECT * 
-        FROM movies 
-        WHERE id_user = $1
-            AND ($2::TEXT IS NULL OR titulo ILIKE $2)
-            AND ($3::TEXT IS NULL OR director ILIKE $3)
-            AND ($4::TEXT IS NULL OR musica ILIKE $4);
-    `;
-
-    console.log("Query:", query);
-    console.log("Values:", values);
-
     try {
-        // Ejecutar la consulta con los valores
-        const result = await pool.query(query, values);
-        return result.rows; // Devuelve los resultados
+        const result = await pool.query(moviesQueries.searchMovies, values);
+        return result.rows;
     } catch (error) {
         console.error('Error al obtener las películas:', error);
         throw error;
@@ -61,28 +47,26 @@ const createMovie = async (rbody) => {
         rating
     } = rbody;
 
-    // Aseguramos que los campos opcionales sean null si no están definidos
     const values = [
-        titulo,  // Título de la película (Requerido)
-        titulo_original || null,  // Título original (opcional)
-        anio,  // Año (Requerido)
-        director,  // Director (Requerido)
-        sinopsis || null,  // Sinopsis (opcional)
-        musica || null,  // Música (opcional)
-        portada || null,  // Portada (opcional)
-        video || null,  // Video (opcional)
-        image_url || null,  // URL de imagen (opcional)
-        rating || null,  // Calificación (opcional)
-        id_user  // id_user (Requerido)
+        titulo,  // (requerido)
+        titulo_original || null, 
+        anio,  // (requerido)
+        director,  // (requerido)
+        sinopsis || null, 
+        musica || null, 
+        portada || null, 
+        video || null, 
+        image_url || null, 
+        rating || null, 
+        id_user 
     ];
 
     try {
-        // Consulta SQL de inserción
-        const result = await pool.query(moviesQueries.createMovie, values);
-        console.log(result); // Para depuración
 
-        // Devolver la película recién creada
+        const result = await pool.query(moviesQueries.createMovie, values);
+        console.log(result);
         return result.rows[0];
+
     } catch (error) {
         console.error('Error al crear la película:', error);
         throw error;
@@ -105,7 +89,7 @@ const updateMovie = async (reqbody) => {
         rating
     } = reqbody;
 
-    // Aseguramos que los campos opcionales sean null si no están definidos
+    // aseguramos que los campos opcionales sean null si no están definidos
     const values = [
         titulo, // $1
         titulo_original || null, // $2

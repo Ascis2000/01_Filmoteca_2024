@@ -1,9 +1,18 @@
 
-exports.getAllMovies = `
+const getAllMovies = `
     SELECT * FROM movies WHERE id_user = $1
 `;
 
-exports.createMovie = `
+const searchMovies = `
+    SELECT * 
+    FROM movies 
+    WHERE id_user = $1
+        AND ($2::TEXT IS NULL OR titulo ILIKE $2)
+        AND ($3::TEXT IS NULL OR director ILIKE $3)
+        AND ($4::TEXT IS NULL OR musica ILIKE $4);
+`;
+
+const createMovie = `
     INSERT INTO movies (
         titulo, 
         titulo_original, 
@@ -21,7 +30,7 @@ exports.createMovie = `
     RETURNING *;
 `
 
-exports.updateMovie = `
+const updateMovie = `
     UPDATE movies
     SET
         titulo = $1,
@@ -38,7 +47,15 @@ exports.updateMovie = `
         id_movie = $11 AND id_user = $12
     RETURNING *;
 `
-exports.deleteMovie = `
+const deleteMovie = `
     DELETE FROM movies 
     WHERE id_movie = $1 AND id_user = $2;
 `
+
+module.exports = {
+    getAllMovies,
+    searchMovies,
+    createMovie,
+    updateMovie,
+    deleteMovie
+};
