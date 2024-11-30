@@ -5,6 +5,8 @@ import { useNavigate, useLocation } from "react-router-dom";
 import Cookies from "js-cookie";
 import jwt_decode from "jwt-decode";
 
+import "./MovieForm.css"
+
 const MovieForm = () => {
 	const location = useLocation();
 	const navigate = useNavigate();
@@ -72,9 +74,9 @@ const MovieForm = () => {
 				body: JSON.stringify(dataToSend),
 			});
 			if (response.ok) {
-				navigate("/peliculas"); // Redirige a la lista
+				navigate("/peliculas");
 			} else {
-				console.error("Erroooor al guardar la película");
+				console.error("Error al guardar la película");
 			}
 		} catch (error) {
 			console.error("Error:", error);
@@ -82,10 +84,10 @@ const MovieForm = () => {
 	};
 
 	return (
-		<div>
-			<h1>{pelicula ? "Editar Película" : "Añadir Nueva Película"}</h1>
+		<div className="boxFormMovie">
+			<h3>{pelicula ? "Modo: Editar Película" : "Modo: Añadir Nueva Película"}</h3>
 			<form onSubmit={handleSubmit}>
-				<div>
+				<div className="row">
 					<label>Título:</label>
 					<input
 						type="text"
@@ -95,7 +97,7 @@ const MovieForm = () => {
 						required
 					/>
 				</div>
-				<div>
+				<div className="row">
 					<label>Director:</label>
 					<input
 						type="text"
@@ -105,7 +107,7 @@ const MovieForm = () => {
 						required
 					/>
 				</div>
-				<div>
+				<div className="row">
 					<label>Año:</label>
 					<input
 						type="number"
@@ -115,7 +117,7 @@ const MovieForm = () => {
 						required
 					/>
 				</div>
-				<div>
+				<div className="row">
 					<label>Sinopsis:</label>
 					<textarea
 						name="sinopsis"

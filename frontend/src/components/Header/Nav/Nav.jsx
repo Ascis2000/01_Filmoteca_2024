@@ -13,6 +13,12 @@ const Nav = ({ onAuthClick }) => {
 	return (
 		
 		<nav className="navigation">
+			<div className="logo-container">
+				<i className="fas fa-video fa-2x"></i>
+				<div className="logo">
+					<Link to="/">Filmoteca 2024</Link>
+				</div>
+			</div>
 			<ul>
 				<li><Link to="/">Home</Link></li>
 				{
@@ -24,12 +30,11 @@ const Nav = ({ onAuthClick }) => {
 						
 					) : null
 				}
-				<li>
-					<div className="auth-icon" onClick={onAuthClick}>
-						<i className="fa fa-user-circle"></i>
-					</div>
-				</li>
+
 			</ul>
+			<div className={`auth-icon ${isAuthenticated ? "on" : ""}`} onClick={onAuthClick}>
+				<i className="fa fa-user-circle"></i>
+			</div>
 		</nav>
 	);
 };

@@ -1,11 +1,14 @@
 
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import { Tooltip } from 'react-tooltip';
 
 import Cookies from "js-cookie";
 import jwt_decode from "jwt-decode";
 
 import { v4 as uuidv4 } from "uuid";
+
+import "./ListaMovies.css";
 
 const ListaMovies = () => {
 	const [peliculas, setPeliculas] = useState([]);
@@ -117,33 +120,59 @@ const ListaMovies = () => {
 	};
 
 	return (
-		<div>
-			<h1>Mis Películas</h1>
-			<h3>Listado de películas</h3>
-			<button onClick={handleCreate} style={{ marginBottom: "20px" }}>
-				Añadir Película
-			</button>
-			<ul>
+		<div className="boxMovies">
+			<h3>Mis Películas</h3>
+
+			<div className="info">
+				<label>Total Películas registradas: {peliculas.length}</label>
+				<button onClick={handleCreate} style={{ marginBottom: "20px" }}>
+					Añadir Película
+				</button>
+			</div>
+
+			<div className="movie-grid">
+
 				{peliculas.map((pelicula) => (
-					<li key={uuidv4()}>
-						<div>
-							{pelicula.titulo} de {pelicula.director}. ({pelicula.anio})
+					<div className="movie-card" key={uuidv4()}>
+						<h2>{pelicula.titulo}</h2>
+						<div>{pelicula.director}</div>
+						<div>{pelicula.anio}</div>
+
+						<div className="boxRatingStars">
+							<i className="fas fa-star on"></i>
+							<i className="fas fa-star on"></i>
+							<i className="fas fa-star on"></i>
+							<i className="fas fa-star on"></i>
+							<i className="fas fa-star on"></i>
 						</div>
-						<button onClick={() => handleDetails(pelicula)} style={{ marginLeft: "10px" }}>
-							Detalle
-						</button>
-						<button onClick={() => handleEdit(pelicula)} style={{ marginLeft: "10px" }}>
-							Editar
-						</button>
-						<button
-							onClick={() => handleDelete(pelicula.id_movie)}
-							style={{ marginLeft: "10px", backgroundColor: "red", color: "white" }}
-						>
-							Borrar
-						</button>
-					</li>
+
+						<div className="boxBotonera">
+							<i 
+								data-tooltip-id="c_ttip"
+								data-tooltip-content="Ver Ficha"
+								data-tooltip-delay-hide={100}
+								onClick={() => handleDetails(pelicula)} 
+								className="fas fa-eye">
+							</i>
+							<i 
+								data-tooltip-id="c_ttip"
+								data-tooltip-content="Editar"
+								data-tooltip-delay-hide={100}
+								onClick={() => handleEdit(pelicula)} 
+								className="fas fa-edit">
+							</i>
+							<i 
+								data-tooltip-id="c_ttip"
+								data-tooltip-content="Borrar"
+								data-tooltip-delay-hide={100}
+								onClick={() => handleDelete(pelicula.id_movie)} 
+								className="fas fa-trash-alt">
+							</i>
+						</div>
+					</div>
 				))}
-			</ul>
+			</div>
+			<Tooltip id="c_ttip" />
 		</div>
 	);
 };

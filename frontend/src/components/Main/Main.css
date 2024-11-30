@@ -1,8 +1,83 @@
 
-main {
-    flex-grow: 1; 
-    height: 100%;
+.boxMain {
     display: flex;
+    align-items: center;
 	flex-direction: column;
-    border: 2px solid blue;
+
+    color: white;
+    margin-top: 5px;
+    min-height: 100vh;
+    padding: 15px 30px;
+    
+    border-radius: 3px 3px 3px 3px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    background: linear-gradient(to right, #002D62, #0c5196);
+}
+
+.home {
+    width: 100%;
+    text-align: left;
+    background: rgba(0, 0, 0, 0.6);
+    padding: 30px;
+    margin-top: 20px;
+    border-radius: 10px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+}
+
+.home h2 {
+    font-size: 1.5rem;
+    margin: 5px 0px 15px 0px;
+    color: #FFD700; /* Dorado para el título */
+    font-weight: bold;
+}
+
+.home p {
+    font-size: 1.1rem;
+    margin-bottom: 10px;
+    line-height: 1.6;
+}
+
+.boxMain button {
+    cursor: pointer;
+	padding: 0.6em 1.2em;
+
+    border-radius: 8px;
+	background-color: #f9f9f9;
+    border: 1px solid transparent;
+	background: linear-gradient(to bottom, #FFFFFF, #e8e35f);
+
+	transition: border-color 0.25s, box-shadow 0.3s ease, background 0.3s ease;
+}
+.boxMain button:hover {
+	box-shadow: 0 0 10px 3px rgba(255, 255, 255, 0.8);
+	background-color: #f2f1e7;
+	background: linear-gradient(to bottom, #ffffff, #fcf998); 
+}
+
+/* FadeIn Animation */
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .home {
+        padding: 20px;
+        max-width: 90%;
+    }
+
+    .home h1 {
+        font-size: 1.5rem;
+    }
+
+    .home p {
+        font-size: 1rem;
+    }
 }

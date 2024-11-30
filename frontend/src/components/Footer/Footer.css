@@ -1,0 +1,44 @@
+
+/* General Footer Styles */
+footer {
+    background: #001f3d; /* Fondo oscuro, manteniendo la temática */
+    color: white;
+    text-align: center;
+    padding: 20px;
+
+    width: 100%;
+    margin-top: 5px;
+    font-family: 'Arial', sans-serif;
+    font-size: 1rem;
+    border-radius: 3px;
+}
+
+footer p {
+    margin: 0;
+    color: #FFD700; /* Texto dorado para el copyright */
+}
+
+/* Animación suave para el texto del footer */
+footer p {
+    animation: fadeInFooter 3s ease-out;
+}
+
+/* FadeIn Animation for Footer Text */
+@keyframes fadeInFooter {
+    0% {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    footer {
+        font-size: 0.9rem;
+        padding: 15px;
+    }
+}
