@@ -17,7 +17,7 @@ const Header = () => {
     const [isVisible, setIsAuthVisible] = useState(true);
     
     // FUNCION
-    // Toogle que muestra u oculta el objeto 
+    // Toogle que muestra u oculta la capa de autenticacion 
     const toggleAuth = () => {
         const visible = !isVisible; // invierte el estado actual
         setIsAuthVisible(visible); // actualiza el estado con el nuevo valor
@@ -39,7 +39,7 @@ const Header = () => {
                 
             </header> */}
 
-            <header className="header-container">
+            <header className="boxHeader">
                 <Nav onAuthClick={toggleAuth} />
             </header>
         </>

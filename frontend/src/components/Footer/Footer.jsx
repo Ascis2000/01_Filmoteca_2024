@@ -1,9 +1,11 @@
+
 import React from "react";
+import "./Footer.css"
 
 const Footer = () => {
   return (
     <footer>
-      <p>&copy; 2024 Mi Aplicación de Películas</p>
+      <p>&copy; Filmoteca 2024 App. All Rights reserved</p>
     </footer>
   );
 };

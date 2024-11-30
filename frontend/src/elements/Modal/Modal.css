@@ -4,29 +4,31 @@
 	padding: 20px;
 	margin: 0px 10px;
 
-	font-size: 1.3em;
+	font-size: 1.4em;
 	font-weight: bold;
 	text-align: left;
 
 	word-wrap: break-word;
 
 	border-radius: 10px;
+	border: 2px solid rgb(251, 251, 249);
 	box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
 
 	z-index:99;
 }
 
 .modal.white {
-	color: rgb(13, 38, 76); /* Color del texto */
+	color: rgb(243, 243, 235); /* Color del texto */
     background-color: #ffffff; /* Color de respaldo */
     
     /* Gradiente visible */
-    background: linear-gradient(0deg, #d7e1e7 0%, #ffffff 100%);
+    background: linear-gradient(0deg, #3f579a 0%, #b5c1d0 100%);
 }
 
 .modal.black {
 	color: rgb(255, 255, 255);
 	background-color: #1e2d38;
+	background: linear-gradient(0deg, #243a76 0%, #657c9a 100%);
 }
 
 .bg_modal {
