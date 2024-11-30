@@ -24,7 +24,6 @@ const searchMovies = async (req, res) => {
         
         // Obtener los parámetros de la consulta (titulo, director, musica)
         const { titulo, director, musica } = req.query; 
-        console.log("Controller, titulo=====", titulo);  // Verifica que estos valores sean correctos
 
         // Llamar al modelo con los parámetros
         const movies = await moviesModel.searchMovies(id_user, { titulo, director, musica });
