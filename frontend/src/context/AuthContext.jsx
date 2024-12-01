@@ -17,9 +17,10 @@ export const AuthProvider = ({ children }) => {
     useEffect(() => {
         const token = Cookies.get("token");
         if (token) {
+            console.log("TOKEN", token)
             setIsAuthenticated(true);
             // Si hay token, obtenemos los datos del usuario
-            fetchUserData(token);
+            getUserData(token);
         } else {
             setLoading(false);
         }
@@ -28,12 +29,12 @@ export const AuthProvider = ({ children }) => {
     // Función 
     // obtenemos los datos del usuario desde el backend
     // de esta forma activamos useEffect
-    const fetchUserData = (token) => {
+    const getUserData = (token) => {
         try {
             const decodedToken = jwt_decode(token);
             const userId = decodedToken.id;
 
-            console.log("userId", userId);
+            // Ejem: http://localhost:3000/api/users/10
             fetch(`http://localhost:3000/api/users/${userId}`, {
                 method: "GET",
                 headers: {
@@ -67,7 +68,7 @@ export const AuthProvider = ({ children }) => {
     const login = (token) => {
         Cookies.set("token", token, { path: "/" });
         setIsAuthenticated(true);
-        fetchUserData(token); // obtenemos los datos del usuario
+        getUserData(token); // obtenemos los datos del usuario
     };
 
     // eliminamos la cookie 'token'
