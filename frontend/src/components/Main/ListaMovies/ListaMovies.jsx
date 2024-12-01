@@ -1,7 +1,11 @@
 
-import React, { useState, useEffect } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { Tooltip } from 'react-tooltip';
+
+import utilsToken from "../../../utils/token.js";
+import { AuthContext } from "../../../context/AuthContext";
+import serviceMovies from '../../../services/movies.service.js';
 
 import Cookies from "js-cookie";
 import jwt_decode from "jwt-decode";
@@ -14,38 +18,33 @@ const ListaMovies = () => {
 	const [peliculas, setPeliculas] = useState([]);
 	const navigate = useNavigate();
 
+	// desestructuración de la variable de contexto AuthContext
+	const { isAuthenticated, user, loading, error } = useContext(AuthContext);
+
 	useEffect(() => {
+
 		const fetchPeliculas = async () => {
 			try {
-				const token = Cookies.get("token");
+				let idUser = null;
 
-				if (!token) {
-					console.error("No JWT token found");
+				// obtenemos el token
+				const decodedToken = utilsToken.getDecodedToken();
+
+				// obtenemos su identificador de usuario
+				if (decodedToken) {
+					idUser = decodedToken.id;
+				}
+
+				if (!idUser) {
+					console.error("ListaMovies: No existe el token");
 					return;
 				}
 
-				const decodedToken = jwt_decode(token);
-				const userId = decodedToken.id;
+				// llamamos al servicio de movies (fetch)
+				// `http://localhost:3000/api/movies/all/${idUser}`
+				const movies = await serviceMovies.getAllMovies(idUser);
+        		setPeliculas(movies);
 
-				if (!userId) {
-					console.error("No userId found in token");
-					return;
-				}
-
-				const response = await fetch(
-					`http://localhost:3000/api/movies/all/${userId}`,
-					{
-						method: "GET",
-						headers: { "Content-Type": "application/json" },
-					}
-				);
-
-				if (response.ok) {
-					const data = await response.json();
-					setPeliculas(data.movies);
-				} else {
-					console.error("Error al obtener las películas:", response.statusText);
-				}
 			} catch (error) {
 				console.error("Error en la solicitud fetch:", error);
 			}

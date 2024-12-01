@@ -41,7 +41,7 @@ const Auth = ({ onClose }) => {
         setModalText("Procesando solicitud...");
 
         try {
-            console.log("endpoint", endpoint)
+
             const response = await fetch(`http://localhost:3000/${endpoint}`, {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },

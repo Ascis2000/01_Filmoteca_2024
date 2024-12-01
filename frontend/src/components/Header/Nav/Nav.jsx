@@ -25,7 +25,7 @@ const Nav = ({ onAuthClick }) => {
 					isAuthenticated ? (
 						<>
 							<li><Link to="/peliculas">Mis Películas</Link></li>
-							<li><Link to="/users/perfil">Mi perfil</Link></li>
+							{/* <li><Link to="/users/perfil">Mi perfil</Link></li> */}
 						</>
 						
 					) : null
