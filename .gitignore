@@ -8,3 +8,4 @@ backend/.env
 
 render.txt
 rutas.txt
+node_modules/
