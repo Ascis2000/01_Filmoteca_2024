@@ -29,35 +29,48 @@ const end = currentPage * itemsPerPage; // 1 * 25 => 25
 */
 
 const Paginacion = ({ currentPage, itemsPerPage, totalItems, onPageChange }) => {
+	
+	const start = (currentPage - 1) * itemsPerPage + 1;
+    const end = Math.min(currentPage * itemsPerPage, totalItems);
 	const totalPages = Math.ceil(totalItems / itemsPerPage);
 
 	return (
+		
 		<div className="boxPagination">
-			<button
-				onClick={() => onPageChange(1)}
-				disabled={currentPage === 1}
-			>
-				&lt;&lt;
-			</button>
-			<button
-				onClick={() => onPageChange(Math.max(currentPage - 1, 1))}
-				disabled={currentPage === 1}
-			>
-				Anterior
-			</button>
-			<span>Página {currentPage} de {totalPages}</span>
-			<button
-				onClick={() => onPageChange(Math.min(currentPage + 1, totalPages))}
-				disabled={currentPage === totalPages}
-			>
-				Siguiente
-			</button>
-			<button
-				onClick={() => onPageChange(totalPages)}
-				disabled={currentPage === totalPages}
-			>
-				&gt;&gt;
-			</button>
+			<div className="boxInfo">
+                <h3>Página {currentPage}/{Math.ceil(totalItems/itemsPerPage)}. (Películas del {start} al {end} de {totalItems})</h3>
+            </div>
+			<div className="boxBotonera">
+				<button
+					className="btn_pagination"
+					onClick={() => onPageChange(1)}
+					disabled={currentPage === 1}
+				>
+					&lt;&lt;
+				</button>
+				<button
+					className="btn_pagination"
+					onClick={() => onPageChange(Math.max(currentPage - 1, 1))}
+					disabled={currentPage === 1}
+				>
+					Anterior
+				</button>
+				<span className="pagination">Página {currentPage} de {totalPages}</span>
+				<button
+					className="btn_pagination"
+					onClick={() => onPageChange(Math.min(currentPage + 1, totalPages))}
+					disabled={currentPage === totalPages}
+				>
+					Siguiente
+				</button>
+				<button
+					className="btn_pagination"
+					onClick={() => onPageChange(totalPages)}
+					disabled={currentPage === totalPages}
+				>
+					&gt;&gt;
+				</button>
+			</div>
 		</div>
 	);
 };

@@ -81,7 +81,7 @@ id_user: ID del usuario que ingresó o es dueño de la película, clave foránea
 -- inserts ejemplo
 INSERT INTO movies (titulo, titulo_original, anio, director, sinopsis, musica, portada, video, image_url, rating, id_user) 
 VALUES 
-('Aliens, El Regreso', 'Aliens: The Return', 1986, 'James Cameron', 'Sinopsis de Aliens, El Regreso...', 'Música de la película Aliens, El Regreso', 'url_de_portada_aliens', 'url_video_aliens', 'url_imagen_aliens', 8.5, 10);
+('Aliens, El Regreso', 'Aliens: The Return', 1986, 'James Cameron', 'Sinopsis de Aliens, El Regreso...', 'Música de la película Aliens, El Regreso', 'url_de_portada_aliens', 'url_video_aliens', 'url_imagen_aliens', 8, 10);
 
 INSERT INTO movies (titulo, titulo_original, anio, director, sinopsis, musica, portada, video, image_url, rating, id_user) 
 VALUES 
@@ -90,6 +90,23 @@ VALUES
 INSERT INTO movies (titulo, titulo_original, anio, director, sinopsis, musica, portada, video, image_url, rating, id_user) 
 VALUES 
 ('Terminator', 'The Terminator', 1984, 'James Cameron', 'Sinopsis de Terminator...', 'Música de la película Terminator', 'url_de_portada_terminator', 'url_video_terminator', 'url_imagen_terminator', 9, 10);
+
+INSERT INTO movies (titulo, titulo_original, anio, director, sinopsis, musica, portada, video, image_url, rating, id_user) 
+VALUES 
+('El resplandor', 'The Shining', 1980, 'Stanley Kubrick', 'Un escritor lleva a su familia a un hotel aislado, donde fuerzas sobrenaturales lo conducen a la locura', 
+'Wendy Carlos y Rachel Elkind', 'url_portada_shining', 'url_video_shining', 'url_imagen_shining', 9, 10)
+
+INSERT INTO movies (titulo, titulo_original, anio, director, sinopsis, musica, portada, video, image_url, rating, id_user) 
+VALUES 
+('La naranja mecánica', 'A Clockwork Orange', 1971, 'Stanley Kubrick', 
+'La historia de un joven sociópata y el programa gubernamental que intenta reformarlo', 
+'Wendy Carlos basada en Beethoven', 'url_portada_clockwork', 'url_video_clockwork', 'url_imagen_clockwork', 9, 10)
+
+INSERT INTO movies (titulo, titulo_original, anio, director, sinopsis, musica, portada, video, image_url, rating, id_user) 
+VALUES 
+('Gladiador', 'Gladiator', 2000, 'Ridley Scott', 
+'Un general romano es traicionado y busca venganza mientras lucha por la libertad de su familia.', 
+'Hans Zimmer y Lisa Gerrard', 'url_portada_gladiator', 'url_video_gladiator', 'url_imagen_gladiator', 8, 10)
 
 
 UPDATE movies

@@ -1,28 +1,39 @@
 
 import React, { useContext, useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { Tooltip } from 'react-tooltip';
-
-import utilsToken from "../../../utils/token.js";
-import { AuthContext } from "../../../context/AuthContext";
-import serviceMovies from '../../../services/movies.service.js';
 
 import Cookies from "js-cookie";
 import jwt_decode from "jwt-decode";
-
 import { v4 as uuidv4 } from "uuid";
+import { Tooltip } from 'react-tooltip';
 
 import "./ListaMovies.css";
 
+import utilsToken from "../../../utils/token.js";
+import Paginacion from '../../../elements/Paginacion';
+import { AuthContext } from "../../../context/AuthContext";
+import serviceMovies from '../../../services/movies.service.js';
+
 const ListaMovies = () => {
-	const [peliculas, setPeliculas] = useState([]);
 	const navigate = useNavigate();
+	const [peliculas, setPeliculas] = useState([]);
 
 	// desestructuración de la variable de contexto AuthContext
 	const { isAuthenticated, user, loading, error } = useContext(AuthContext);
 
-	useEffect(() => {
+	// PAGINACION
+	const [currentPage, setCurrentPage] = useState(1);
+	const itemsPerPage = 4; // Películas por página
 
+	// Total de elementos (películas)
+	const totalItems = peliculas.length; 
+
+	// Calculamos el rango de películas que se mostrarán según la página actual
+	const start = (currentPage - 1) * itemsPerPage;
+	const end = currentPage * itemsPerPage;
+	const peliculasPaginadas = peliculas.slice(start, end); 
+
+	useEffect(() => {
 		const fetchPeliculas = async () => {
 			try {
 				let idUser = null;
@@ -41,9 +52,8 @@ const ListaMovies = () => {
 				}
 
 				// llamamos al servicio de movies (fetch)
-				// `http://localhost:3000/api/movies/all/${idUser}`
 				const movies = await serviceMovies.getAllMovies(idUser);
-        		setPeliculas(movies);
+				setPeliculas(movies); // cargamos la variable estado 'peliculas'
 
 			} catch (error) {
 				console.error("Error en la solicitud fetch:", error);
@@ -68,7 +78,6 @@ const ListaMovies = () => {
 
 		if (confirmDelete) {
 			try {
-				// Obtener el JWT de la cookie
 				const token = Cookies.get("token");
 
 				if (!token) {
@@ -76,7 +85,6 @@ const ListaMovies = () => {
 					return;
 				}
 
-				// decodificamos el token para obtener el id del usuario
 				const decodedToken = jwt_decode(token);
 				const userId = decodedToken.id;
 
@@ -92,21 +100,17 @@ const ListaMovies = () => {
 						headers: {
 							"Content-Type": "application/json",
 						},
-						body: JSON.stringify({ "id_user":userId }),
+						body: JSON.stringify({ "id_user": userId }),
 					}
 				);
 
 				if (response.ok) {
-					// Actualizar la lista de películas después de la eliminación
 					setPeliculas((prevPeliculas) =>
 						prevPeliculas.filter((pelicula) => pelicula.id_movie !== peliculaId)
 					);
-					alert("Película eliminada exitosamente.");
+					alert("Película eliminada con éxito");
 				} else {
-					console.error(
-						"Error al eliminar la película:",
-						response.statusText
-					);
+					console.error("Error al eliminar la película:", response.statusText);
 				}
 			} catch (error) {
 				console.error("Error en la solicitud para eliminar la película:", error);
@@ -124,14 +128,23 @@ const ListaMovies = () => {
 
 			<div className="info">
 				<label>Total Películas registradas: {peliculas.length}</label>
-				<button onClick={handleCreate} style={{ marginBottom: "20px" }}>
-					Añadir Película
+				<button 
+					className="btn_main" 
+					onClick={handleCreate} 
+					style={{ marginBottom: "20px" }}>
+						Añadir Película
 				</button>
 			</div>
 
-			<div className="movie-grid">
+			<Paginacion
+				currentPage={currentPage}
+				itemsPerPage={itemsPerPage}
+				totalItems={totalItems}
+				onPageChange={(cPage) => setCurrentPage(cPage)}
+			/>
 
-				{peliculas.map((pelicula) => (
+			<div className="movie-grid">
+				{peliculasPaginadas.map((pelicula) => (
 					<div className="movie-card" key={uuidv4()}>
 						<h2>{pelicula.titulo}</h2>
 						<div>{pelicula.director}</div>
@@ -146,31 +159,38 @@ const ListaMovies = () => {
 						</div>
 
 						<div className="boxBotonera">
-							<i 
+							<i
 								data-tooltip-id="c_ttip"
 								data-tooltip-content="Ver Ficha"
 								data-tooltip-delay-hide={100}
-								onClick={() => handleDetails(pelicula)} 
-								className="fas fa-eye">
-							</i>
-							<i 
+								onClick={() => handleDetails(pelicula)}
+								className="fas fa-eye"
+							/>
+							<i
 								data-tooltip-id="c_ttip"
 								data-tooltip-content="Editar"
 								data-tooltip-delay-hide={100}
-								onClick={() => handleEdit(pelicula)} 
-								className="fas fa-edit">
-							</i>
-							<i 
+								onClick={() => handleEdit(pelicula)}
+								className="fas fa-edit"
+							/>
+							<i
 								data-tooltip-id="c_ttip"
 								data-tooltip-content="Borrar"
 								data-tooltip-delay-hide={100}
-								onClick={() => handleDelete(pelicula.id_movie)} 
-								className="fas fa-trash-alt">
-							</i>
+								onClick={() => handleDelete(pelicula.id_movie)}
+								className="fas fa-trash-alt"
+							/>
 						</div>
 					</div>
 				))}
 			</div>
+
+			<Paginacion
+				currentPage={currentPage}
+				itemsPerPage={itemsPerPage}
+				totalItems={totalItems}
+				onPageChange={(cPage) => setCurrentPage(cPage)}
+			/>
 			<Tooltip id="c_ttip" />
 		</div>
 	);

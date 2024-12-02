@@ -37,7 +37,7 @@
     line-height: 1.6;
 }
 
-.boxMain button {
+.boxMain button.btn_main {
     cursor: pointer;
 	padding: 0.6em 1.2em;
 
@@ -48,7 +48,7 @@
 
 	transition: border-color 0.25s, box-shadow 0.3s ease, background 0.3s ease;
 }
-.boxMain button:hover {
+.boxMain button.btn_main:hover {
 	box-shadow: 0 0 10px 3px rgba(255, 255, 255, 0.8);
 	background-color: #f2f1e7;
 	background: linear-gradient(to bottom, #ffffff, #fcf998); 
