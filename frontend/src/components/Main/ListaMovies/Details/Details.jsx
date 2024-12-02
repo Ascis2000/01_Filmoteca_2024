@@ -20,12 +20,14 @@ const Details = () => {
 		navigate(-1); // Navega hacia la página anterior
 	};
 
+	const defaultImageUrl = "https://salonlfc.com/wp-content/uploads/2018/01/image-not-found-scaled-1150x647.png"; 
+
 	return (
 		<>
 			<div className="boxDetailsMovie">
 				<div className="leftSection">
 					<h2>{pelicula.titulo}</h2>
-					<img src="https://wallpaperaccess.com/full/2612045.jpg" alt="Imagen de Terminator" />
+					<img src={pelicula.image_url || defaultImageUrl} alt="Imagen de " />
 					
 				</div>
 				<div className="rightSection">
@@ -38,11 +40,10 @@ const Details = () => {
 					</p>
 					<p><strong>Director:</strong> {pelicula.director}</p>
 					<p><strong>Año:</strong> {pelicula.anio}</p>
-					<p><strong>Descripción:</strong> {pelicula.sinopsis}</p>
-					<p><strong>Título Original:</strong> aaaaa</p>
-					<p><strong>Música:</strong> Brad Fiedel</p>
-					<p><strong>Casting:</strong> Arnold Schwarzenegger, Linda Hamilton, Michael Biehn</p>
-					<p><strong>Sinopsis:</strong> Un cyborg asesino es enviado al pasasesino es enviado al pasasesino es enviado al pasasesino es enviado al pasasesino es enviado al pasasesino es enviado al pasasesino es enviado al pasasesino es enviado al pasasesino es enviado al pasado...</p>
+					<p><strong>Título Original:</strong> {pelicula.titulo_original}</p>
+					<p><strong>Música:</strong> {pelicula.musica}</p>
+					<p><strong>Casting:</strong> John Doe and Johanna Doe</p>
+					<p><strong>Sinopsis:</strong> {pelicula.sinopsis}</p>
 				</div>
 			</div>
 
