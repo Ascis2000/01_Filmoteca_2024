@@ -54,15 +54,15 @@
     background-color: rgb(239, 242, 246);
 }
 
-.boxBotonera {
+.movie-card .boxBotonera {
     gap: 10px; 
     display: flex; 
     align-items: center; 
     justify-content: flex-end; 
-    margin-top: 30px; 
+    margin-top: 30px;
 }
 
-.boxBotonera i {
+.movie-card .boxBotonera i {
     font-size: 15px; 
     cursor: pointer; 
     transition: transform 0.3s ease, color 0.3s ease;
@@ -77,16 +77,16 @@
 
 /* ******************************* */
 
-.boxBotonera i:hover {
+.movie-card .boxBotonera i:hover {
     transform: scale(1.2);
     color: #007bff; 
 }
 
-.boxBotonera i.fa-edit:hover {
+.movie-card .boxBotonera i.fa-edit:hover {
     color: rgb(83, 193, 36); 
 }
 
-.boxBotonera i.fa-trash-alt:hover {
+.movie-card .boxBotonera i.fa-trash-alt:hover {
     color: red; 
 }
 

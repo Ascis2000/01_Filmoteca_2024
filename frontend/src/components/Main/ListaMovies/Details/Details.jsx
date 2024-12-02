@@ -46,7 +46,7 @@ const Details = () => {
 				</div>
 			</div>
 
-			<button onClick={handleGoBack}>
+			<button className="btn_main" onClick={handleGoBack}>
 				Volver
 			</button>
 		</>

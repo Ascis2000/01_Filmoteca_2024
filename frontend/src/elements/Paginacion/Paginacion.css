@@ -1,38 +1,57 @@
 
 .boxPagination {
-    gap: 10px;
+    gap: 2px;
     display: flex;
-    margin-top: 20px;
+    flex-direction: column;
+    margin: 0px auto;
     align-items: center;
     justify-content: center;
 
 	font-size: 12px;
 }
 
-.boxPagination button {
+.boxPagination .boxInfo{
+    padding: 0px 2px 0px 2px;
+}
+
+.boxPagination div.boxBotonera {
+    gap: 5px; 
+    display: flex;
+    justify-content: center; 
+    margin: 0px 0px 10px 0px;
+}
+
+.boxPagination button.btn_pagination {
 	border: none;
     color: white;
+    outline: none;
     cursor: pointer;
     padding: 10px 20px;
+
     border-radius: 5px;
-    background-color: #007bff;
-    transition: background-color 0.3s;
-}
-
-.boxPagination button:hover {
     background-color: #0056b3;
+    background: linear-gradient(to bottom, #afc3d5, #0056b3);
+    
+    transition: box-shadow 0.3s ease, background-color 0.3s;
 }
 
-.boxPagination button:disabled {
+.boxPagination button.btn_pagination:not(:disabled):hover {
+    background-color: #007bff;
+    box-shadow: 0 0 10px 3px rgba(244, 247, 247, 0.8);
+}
+
+.boxPagination button.btn_pagination:disabled {
 	cursor: default;
     background-color: #ccc;
+    background: linear-gradient(to bottom, #969c9f, #7f8182);
 }
 
-.boxPagination span {
+.boxPagination span.pagination {
 	cursor: default;
     font-weight: bold;
-	padding: 10px 20px;
+	padding: 8px 20px;
     border-radius: 5px;
-	background-color: #e8ecf1;
-	border:1px solid rgb(206, 219, 226);
+
+	border-top:1px solid rgb(226, 223, 206);
+    border-bottom:1px solid rgb(224, 209, 127);
 }

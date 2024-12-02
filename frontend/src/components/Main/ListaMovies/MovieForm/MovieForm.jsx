@@ -127,8 +127,8 @@ const MovieForm = () => {
 					></textarea>
 				</div>
 				<div className="boxBotonera">
-                    	<button onClick={handleVolver}>Cancelar</button>
-						<button type="submit">{pelicula ? "Guardar Cambios" : "Crear"}</button>
+                    <button className="btn_main" onClick={handleVolver}>Cancelar</button>
+					<button className="btn_main" type="submit">{pelicula ? "Guardar Cambios" : "Crear"}</button>
 				</div>
 			</form>
 		</div>
