@@ -22,7 +22,7 @@ const Auth = ({ onClose }) => {
     const [isLoginMode, setIsLoginMode] = useState(true);
 
     useEffect(() => {
-        // si el usuario está logueado, podemos omitir los campos de login/registro
+        
         if (isAuthenticated) {
             setIsLoginMode(false); // isLoginMode = false
         }
@@ -49,9 +49,9 @@ const Auth = ({ onClose }) => {
             });
 
             const data = await response.json();
-            console.log("data.token", data.token)
+            console.log("data.token", data.user.id_user)
             if (isLoginMode && data.token) {
-                login(data.token); // llamamos al método del contexto
+                login(data.token); 
                 setModalText("¡Se ha iniciado la sesión!");
                 setTimeout(() => {
                     setShowModal(false); 
@@ -60,6 +60,34 @@ const Auth = ({ onClose }) => {
                 }, 2000);
             } else if (!isLoginMode) {
                 setModalText("¡Registro completado con éxito!");
+
+                // insertamos la primera pelicula al hacer el registro
+                const movieInsertResponse = await fetch('http://localhost:3000/api/movies/create', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        "titulo": "2001: A Space Odyssey",
+                        "titulo_original": "2001: A Space Odyssey",
+                        "anio": 1968,
+                        "director": "Stanley Kubrick",
+                        "sinopsis": "En el futuro, una misión espacial es enviada al planeta Júpiter después de que un monolito misterioso se encuentra en la luna. La tripulación debe lidiar con el peligroso HAL 9000, una inteligencia artificial a bordo de la nave.",
+                        "musica": "György Ligeti, Richard Strauss, Johann Strauss II, entre otros",
+                        "portada": "url_portada_2001",
+                        "video": "url_video_2001",
+                        "image_url": "https://wallpapercave.com/wp/iYo95G7.jpg",
+                        rating: 5,
+                        id_user: data.user.id_user
+                    }),
+                });
+
+                if (movieInsertResponse.ok) {
+                    console.log('Película insertada correctamente');
+                } else {
+                    console.error('Error al insertar la película');
+                }
+
                 setTimeout(() => setShowModal(false), 100);
             }
         } catch (error) {

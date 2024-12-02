@@ -1,0 +1,356 @@
+{
+	"info": {
+		"_postman_id": "8e462fa0-d04c-41a5-83a9-a65f9b30f505",
+		"name": "Filmoteca2024",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "23301377"
+	},
+	"item": [
+		{
+			"name": "api/users",
+			"item": [
+				{
+					"name": "api/users",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/api/users/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"users",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "api/users/:id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/api/users/7",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"users",
+								"7"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "register",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nombre\": \"Alberto1\",\r\n    \"email\": \"a1@a.es\",\r\n    \"password\": \"pwd123\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/users/register",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"users",
+								"register"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "login",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"a1@a.es\",\r\n    \"password\": \"pwd123\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/users/login",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"users",
+								"login"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "auth/",
+			"item": [
+				{
+					"name": "register",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nombre\": \"Alberto2\",\r\n    \"email\": \"a2@a2.es\",\r\n    \"password\": \"123\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/auth/register",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"auth",
+								"register"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "login",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nombre\": \"Alberto\",\r\n    \"password\": \"123\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/auth/login",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"auth",
+								"login"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "api/movies",
+			"item": [
+				{
+					"name": "/",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/api/movies/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"movies",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "all/:id_user",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/api/movies/all/10",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"movies",
+								"all",
+								"10"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "search/:id_user",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/api/movies/search/10?titulo=&director=ey kub&musica=",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"movies",
+								"search",
+								"10"
+							],
+							"query": [
+								{
+									"key": "titulo",
+									"value": ""
+								},
+								{
+									"key": "director",
+									"value": "ey kub"
+								},
+								{
+									"key": "musica",
+									"value": ""
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "create",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id_user\": 10,  // ID del usuario que está agregando la película\r\n    \"titulo\": \"Alien: El octavo pasajero\",  // Título de la película (requerido)\r\n    \"titulo_original\": \"Alien\",  // Título original (opcional)\r\n    \"anio\": 1979,  // Año de estreno (requerido)\r\n    \"director\": \"Ridley Scott\",  // Director de la película (requerido)\r\n    \"sinopsis\": \"Un grupo de astronautas se encuentra con una forma de vida alienígena mientras exploran el espacio. La criatura es extremadamente peligrosa y comienza a atacar uno por uno a la tripulación.\",  // Sinopsis (opcional)\r\n    \"musica\": \"Jerry Goldsmith\",  // Compositor de la música (opcional)\r\n    \"portada\": \"https://example.com/portada.jpg\",  // URL de la portada (opcional)\r\n    \"video\": \"https://example.com/video.mp4\",  // URL del video (opcional)\r\n    \"image_url\": \"https://example.com/image.jpg\",  // URL de la imagen (opcional)\r\n    \"rating\": 8  // Calificación (opcional, debe ser entre 1 y 10)\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/movies/create",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"movies",
+								"create"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id_user\": 10,  // ID del usuario que está agregando la película\r\n    \"id_movie\": 33,\r\n    \"titulo\": \"Alien: El octavo pasajero\", // (requerido)\r\n    \"titulo_original\": \"Alien\",\r\n    \"anio\": 2050,  // (requerido)\r\n    \"director\": \"Ridley Scuuuutt\",  // (requerido)\r\n    \"sinopsis\": \"Un grupo de astronautas se encuentra con una forma de vida alienígena mientras exploran el espacio. La criatura es extremadamente peligrosa y comienza a atacar uno por uno a la tripulación.\", \r\n    \"musica\": \"Jerry Goldsmith\", \r\n    \"portada\": \"https://example.com/portada.jpg\",\r\n    \"video\": \"https://example.com/video.mp4\",\r\n    \"image_url\": \"https://example.com/image.jpg\",\r\n    \"rating\": 8 \r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/movies/update/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"movies",
+								"update",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id_user\": 10\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/movies/delete/34",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"movies",
+								"delete",
+								"34"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}

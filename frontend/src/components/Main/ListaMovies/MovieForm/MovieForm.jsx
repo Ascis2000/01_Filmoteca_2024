@@ -10,13 +10,18 @@ import "./MovieForm.css"
 const MovieForm = () => {
 	const location = useLocation();
 	const navigate = useNavigate();
-	const pelicula = location.state || null; // Si es edición, llega la película
+	const pelicula = location.state || null; // si es edición, llega la película
 
 	const [formData, setFormData] = useState({
 		titulo: "",
+		titulo_original: "",
 		director: "",
 		anio: "",
-		sinopsis: ""
+		sinopsis: "",
+		musica: "",
+		video: "",
+		image_url: "",
+		rating: ""
 	});
 
 	useEffect(() => {
@@ -30,7 +35,7 @@ const MovieForm = () => {
 	};
 
 	const handleVolver = () => {
-		navigate(-1); // Volver a la página anterior
+		navigate(-1); // volver a la página anterior
 	};
 
 	const handleSubmit = async (e) => {
@@ -50,7 +55,7 @@ const MovieForm = () => {
 			const userId = decodedToken.id;
 
 			if (!userId) {
-				console.error("No userId found in token");
+				console.error("Ningún userId fue encontrado en el token");
 				return;
 			}
 
@@ -59,8 +64,6 @@ const MovieForm = () => {
 				? `http://localhost:3000/api/movies/update/`
 				: "http://localhost:3000/api/movies/create";
 			
-			
-
 			// Añadir id_user al formData
 			const dataToSend = { ...formData, id_user: userId };
 
@@ -98,6 +101,16 @@ const MovieForm = () => {
 					/>
 				</div>
 				<div className="row">
+					<label>Título Original:</label>
+					<input
+						type="text"
+						name="titulo_original"
+						value={formData.titulo_original}
+						onChange={handleChange}
+						required
+					/>
+				</div>
+				<div className="row">
 					<label>Director:</label>
 					<input
 						type="text"
@@ -115,6 +128,45 @@ const MovieForm = () => {
 						value={formData.anio}
 						onChange={handleChange}
 						required
+					/>
+				</div>
+				<div className="row">
+					<label>Música:</label>
+					<input
+						type="text"
+						name="musica"
+						value={formData.musica}
+						onChange={handleChange}
+					/>
+				</div>
+				<div className="row">
+					<label>Video:</label>
+					<input
+						type="text"
+						name="video"
+						value={formData.video}
+						onChange={handleChange}
+					/>
+				</div>
+				<div className="row">
+					<label>Imagen URL:</label>
+					<input
+						type="text"
+						name="image_url"
+						value={formData.image_url}
+						onChange={handleChange}
+					/>
+				</div>
+				<div className="row">
+					<label>Rating:</label>
+					<input
+						type="number"
+						name="rating"
+						value={formData.rating}
+						onChange={handleChange}
+						min="0"
+						max="5"
+						step="0.5"
 					/>
 				</div>
 				<div className="row">

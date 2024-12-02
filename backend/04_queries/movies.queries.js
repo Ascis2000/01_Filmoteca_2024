@@ -1,6 +1,7 @@
 
 const getAllMovies = `
     SELECT * FROM movies WHERE id_user = $1
+    ORDER BY titulo ASC;
 `;
 
 const searchMovies = `

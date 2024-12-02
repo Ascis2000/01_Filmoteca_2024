@@ -23,7 +23,7 @@ const ListaMovies = () => {
 
 	// PAGINACION
 	const [currentPage, setCurrentPage] = useState(1);
-	const itemsPerPage = 4; // Películas por página
+	const itemsPerPage = 6; // Películas por página
 
 	// Total de elementos (películas)
 	const totalItems = peliculas.length; 
@@ -122,6 +122,8 @@ const ListaMovies = () => {
 		navigate(`/peliculas/create`);
 	};
 
+	const defaultImageUrl = "https://salonlfc.com/wp-content/uploads/2018/01/image-not-found-scaled-1150x647.png"; 
+
 	return (
 		<div className="boxMovies">
 			<h3>Mis Películas</h3>
@@ -146,9 +148,15 @@ const ListaMovies = () => {
 			<div className="movie-grid">
 				{peliculasPaginadas.map((pelicula) => (
 					<div className="movie-card" key={uuidv4()}>
-						<h2>{pelicula.titulo}</h2>
-						<div>{pelicula.director}</div>
-						<div>{pelicula.anio}</div>
+						<div className="box_data1">
+							<img src={pelicula.image_url || defaultImageUrl} />
+							<h2>{pelicula.titulo}</h2>
+						</div>
+						
+						<div className="box_data2">
+							<div>{pelicula.director}</div>
+							<div>{pelicula.anio}</div>
+						</div>
 
 						<div className="boxRatingStars">
 							<i className="fas fa-star on"></i>
