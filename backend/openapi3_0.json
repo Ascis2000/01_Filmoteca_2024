@@ -1,0 +1,283 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Filmoteca2024",
+    "description": "API de la filmoteca",
+    "version": "1.0.0"
+  },
+  "servers": [
+    {
+      "url": "http://localhost:3000"
+    }
+  ],
+  "paths": {
+    "/api/users": {
+      "get": {
+        "summary": "Obtener todos los usuarios",
+        "responses": {
+          "200": {
+            "description": "Lista de usuarios",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "id": {
+                        "type": "integer"
+                      },
+                      "nombre": {
+                        "type": "string"
+                      },
+                      "email": {
+                        "type": "string"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/users/{id}": {
+      "get": {
+        "summary": "Obtener un usuario por ID",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Usuario encontrado",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "integer"
+                    },
+                    "nombre": {
+                      "type": "string"
+                    },
+                    "email": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/users/register": {
+      "post": {
+        "summary": "Registrar un nuevo usuario",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "nombre": {
+                    "type": "string"
+                  },
+                  "email": {
+                    "type": "string"
+                  },
+                  "password": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Usuario registrado"
+          },
+          "400": {
+            "description": "Error en los datos"
+          }
+        }
+      }
+    },
+    "/api/users/login": {
+      "post": {
+        "summary": "Login de usuario",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "email": {
+                    "type": "string"
+                  },
+                  "password": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Login exitoso"
+          },
+          "401": {
+            "description": "Credenciales incorrectas"
+          }
+        }
+      }
+    },
+    "/api/movies": {
+      "get": {
+        "summary": "Obtener todas las películas",
+        "responses": {
+          "200": {
+            "description": "Lista de películas",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "id": {
+                        "type": "integer"
+                      },
+                      "titulo": {
+                        "type": "string"
+                      },
+                      "director": {
+                        "type": "string"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/movies/create": {
+      "post": {
+        "summary": "Crear una nueva película",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "id_user": {
+                    "type": "integer"
+                  },
+                  "titulo": {
+                    "type": "string"
+                  },
+                  "anio": {
+                    "type": "integer"
+                  },
+                  "director": {
+                    "type": "string"
+                  },
+                  "sinopsis": {
+                    "type": "string"
+                  },
+                  "musica": {
+                    "type": "string"
+                  },
+                  "portada": {
+                    "type": "string"
+                  },
+                  "video": {
+                    "type": "string"
+                  },
+                  "rating": {
+                    "type": "integer"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Película creada"
+          },
+          "400": {
+            "description": "Datos incorrectos"
+          }
+        }
+      }
+    },
+    "/api/movies/update": {
+      "put": {
+        "summary": "Actualizar una película existente",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "id_movie": {
+                    "type": "integer"
+                  },
+                  "id_user": {
+                    "type": "integer"
+                  },
+                  "titulo": {
+                    "type": "string"
+                  },
+                  "anio": {
+                    "type": "integer"
+                  },
+                  "director": {
+                    "type": "string"
+                  },
+                  "sinopsis": {
+                    "type": "string"
+                  },
+                  "musica": {
+                    "type": "string"
+                  },
+                  "portada": {
+                    "type": "string"
+                  },
+                  "video": {
+                    "type": "string"
+                  },
+                  "rating": {
+                    "type": "integer"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Película actualizada"
+          },
+          "400": {
+            "description": "Datos incorrectos"
+          }
+        }
+      }
+    }
+  }
+}
