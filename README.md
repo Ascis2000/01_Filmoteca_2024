@@ -84,6 +84,12 @@ Este es un proyecto que consta de dos partes: el **backend** y el **frontend**. 
 <img src="https://github.com/user-attachments/assets/4c730ee3-8c6a-42c5-82bf-ec4d6e7cc3e4" width="350">
 
 
+- **Trello**: Seguimiento de tareasdel proyecto
+<a href="https://trello.com/b/tccUsJj6/filmoteca-2024" target="_blank">Trello</a>
+<img src="https://github.com/user-attachments/assets/3ff695e9-4469-4547-b820-16e1663af22f" width="350">
+
+
+
 ## Despliegue
 
 ### Backend
